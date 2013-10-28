@@ -33,12 +33,12 @@ public class Parser : MonoBehaviour {
     <P> </P>
 	**/
 	
-	SimpleGraph GraphfromFile( string filename ) {
+	public void GraphfromFile( string filename ) {
 		
 		FileInfo source = null;
 		Streamreader reader = null; 
 		string linebuffer; 
-		int 
+		
 		var builder = new SimpleGraphBuilder();
 		
 		source = new FileInfo(Application.dataPath + filename);
