@@ -4,16 +4,16 @@ using System.Collections;
 public class Branch : MonoBehaviour {
 	public GameObject node1;
 	public GameObject node2;
-	Transform tf;
 	public GameObject cyl;
+	private int nodeIndex = 0;
+	public string file;
 
 	// Use this for initialization
 	void Start () {
 		node1.transform.LookAt(node2.transform.localPosition);
-		cyl = (GameObject)Instantiate(cyl);;
+		cyl = (GameObject)Instantiate(cyl);
 		Vector3 rot = new Vector3(node1.transform.rotation.x + 90, node1.transform.rotation.y, node1.transform.rotation.z);
 		cyl.transform.rotation = node1.transform.rotation;
-		//cyl.transform.Rotate(cyl.transform.forward, 90 );
 		cyl.transform.forward = cyl.transform.up;
 
 		
