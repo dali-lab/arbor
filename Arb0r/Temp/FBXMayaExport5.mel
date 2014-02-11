@@ -1,0 +1,23 @@
+print "Starting maya loading and fbx conversion \n";
+	
+if (`file -q -exists "/Users/jctwake/Arbor/arbor/Arb0r/Assets/arrow_head.mb"`)
+{		
+	file -o "/Users/jctwake/Arbor/arbor/Arb0r/Assets/arrow_head.mb";
+	FBXExportEmbeddedTextures -v false;
+	// FBXExportHardEdges -v true;
+	FBXExportApplyConstantKeyReducer -v false;
+	FBXExportShowUI -v false;
+
+	print "Before fbx export\n";
+	FBXExport -f "/Users/jctwake/Arbor/arbor/Arb0r/Temp/ExportedFBXFile.fbx";
+	print "after fbx export\n";
+}
+else
+	print "Could not open Maya file.";
+
+
+system ("rm \"/Users/jctwake/Arbor/arbor/Arb0r/Temp/CommandPipe\"");
+
+$donepipeKill = `fopen "/Users/jctwake/Arbor/arbor/Arb0r/Temp/SyncPipeKill" "w"`;
+fwrite $donepipeKill "Done";
+fclose $donepipeKill;

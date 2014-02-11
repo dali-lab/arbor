@@ -5,9 +5,12 @@ public class Node : MonoBehaviour {
 	//public GameObject dummy; // have to use gameobject to make branch function work 
 	public string name;
 	public Vector3 location;
+	CameraControl cc;
+	
 	// Use this for initialization
 	void Start () {
-		//dummy = new GameObject();
+		GameObject go = GameObject.FindGameObjectWithTag("MainCamera");
+		cc = (CameraControl) go.GetComponent(typeof(CameraControl));
 	}
 	
 	// Update is called once per frame
@@ -20,4 +23,11 @@ public class Node : MonoBehaviour {
 		//dummy = new GameObject(name);
 		//dummy.transform.position = loc;
 	}
+	
+	void OnMouseDown () {
+		//BroadcastMessage("getTarget",location, SendMessageOptions.DontRequireReceiver);
+		cc.getTarget(location);
+	}
+	
+
 }

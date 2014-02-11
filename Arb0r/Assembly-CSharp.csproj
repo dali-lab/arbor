@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Branch.cs" />
+     <Compile Include="Assets\CameraControl.cs" />
      <Compile Include="Assets\Node.cs" />
      <Compile Include="Assets\TreeBuilder.cs" />
   </ItemGroup>

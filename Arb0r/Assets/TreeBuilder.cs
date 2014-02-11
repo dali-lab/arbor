@@ -8,6 +8,8 @@ public class TreeBuilder : MonoBehaviour {
 	Hashtable nameXnode = new Hashtable();
 	Hashtable nameXGameObj = new Hashtable();
 	public ArrayList relations = new ArrayList();
+	ArrayList nameList = new ArrayList();
+	ArrayList posList = new ArrayList(); //TEMPORARY
 	//public string[] relations;
 	private string string1;
 	private string string2;
@@ -25,7 +27,18 @@ public class TreeBuilder : MonoBehaviour {
 		Vector3 pos7 = new Vector3(4,5,0);
 		Vector3 pos8 = new Vector3(4,1,1);
 		Vector3 pos9 = new Vector3(1,1,0);
-	
+		
+		posList.Add(pos1);
+		posList.Add(pos2);
+		posList.Add(pos3);
+		posList.Add(pos4);
+		posList.Add(pos5);
+		posList.Add(pos6);
+		posList.Add(pos7);
+		posList.Add(pos8);
+		posList.Add(pos9);
+		
+		
 		
 		string relation1 = "sp1/sp2";       
 		string relation2 = "sp2/nodeA";
@@ -33,6 +46,7 @@ public class TreeBuilder : MonoBehaviour {
 		string relation4 = "sp4/sp5";
 		string relation5 = "sp5/nodeC";
 		string relation6 = "nodeA/sp3";
+		string relation7 = "sp3/nodeB";
 		
 		
 		relations.Add(relation1);
@@ -41,7 +55,9 @@ public class TreeBuilder : MonoBehaviour {
 		relations.Add(relation4);
 		relations.Add(relation5);
 		relations.Add(relation6);
+		relations.Add(relation7);
 		
+		/*
 		Node n1 = new Node("sp1" , pos1);
 		Node n2 = new Node("sp2" , pos2);
 		Node n3 = new Node("sp3" , pos3);
@@ -52,40 +68,40 @@ public class TreeBuilder : MonoBehaviour {
 		Node n8 = new Node("nodeC" , pos8);
 		Node n9 = new Node("nodeD" , pos9);
 		
+		
 		nameXnode[n1.name] = n1;
 		nameXnode[n2.name] = n2;
 		nameXnode[n3.name] = n3;
 		nameXnode[n4.name] = n4;
 		nameXnode[n5.name] = n5;
 		nameXnode[n6.name] = n6;
-		//nameXnode[n7.name] = n7;
+		nameXnode[n7.name] = n7;
 		nameXnode[n8.name] = n8;
 		//nameXnode[n9.name] = n9;
-
+		*/
+		
 		//End of Test
 		
-		int index = 0;
-		ICollection Nodelist = nameXnode.Values;
-		foreach( Node n in Nodelist ) { // loop that loads all shapes using the filename
-			GameObject shape = (GameObject)Instantiate(Resources.Load(n.name));
-			shape.transform.position = n.location;
-			shape.transform.localScale = new Vector3(20,20,20);
-			nameXGameObj[n.name] = shape;
-			//shape.transform.rotation = n.dummy.transform.rotation;
+		int i = 0;
+		foreach(string str in relations){ // loop that parses all the relations from relations[]
+			int l = str.IndexOf("/");
+			string1 = str.Substring(0,l);
+			string2 = str.Substring(l+1);
+			
+			if(!nameList.Contains(string1)){
+				nameList.Add(string1);
+				this.makeNode(string1,i);
+				i++;
+			}
+			if(!nameList.Contains(string2)){
+				nameList.Add(string2);
+				this.makeNode(string2,i);
+				i++;
+			}
+			branch((GameObject)nameXGameObj[string1],(GameObject)nameXGameObj[string2]);
 			
 		}
 		
-		
-		foreach(string str in relations){ // loop that parses all the relations from relations[]
-			int l = str.IndexOf("/");
-			print (l);
-			string1 = str.Substring(0,l);
-			string2 = str.Substring(l+1);
-			branch((GameObject)nameXGameObj[string1],(GameObject)nameXGameObj[string2]);
-		}
-
-				
-	
 	}
 	
 	// Update is called once per frame
@@ -105,6 +121,17 @@ public class TreeBuilder : MonoBehaviour {
 		c.transform.localScale = scale;
 		//Transform t = c.GetComponentInChildren<Transform>();
 		//t.localScale.y = (int)Vector3.Distance(node1.transform.position,node2.transform.position);
+	}
+	
+	void makeNode(string str, int i) {
+		GameObject shape = (GameObject)Instantiate(Resources.Load(str));
+		Node node = shape.gameObject.AddComponent<Node>();
+		node.name = str;
+		node.location = (Vector3)posList[i];
+		shape.transform.position = node.location;
+		//shape.transform.localScale = new Vector3(20,20,20);
+		nameXGameObj[str] = shape;
+		shape.AddComponent<SphereCollider>();
 	}
 	
 	
