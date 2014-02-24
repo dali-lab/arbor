@@ -6,6 +6,7 @@ public class CameraControl : MonoBehaviour {
 	Vector3 startPos = Vector3.zero;
 	Vector3 curPos = Vector3.zero;
 	Vector3 destPos = Vector3.zero;
+	float speed = 35f;
 	bool isMoving = false;
 	bool isClick = false;
 	
@@ -19,7 +20,12 @@ public class CameraControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		if(isMoving == false) {
+			if(Input.GetKey(KeyCode.D))
+				transform.Rotate(Vector3.up * speed * Time.deltaTime);
+			if(Input.GetKey(KeyCode.A))
+				transform.Rotate(-Vector3.up * speed * Time.deltaTime);
+		}
 
 		
 	}
@@ -38,6 +44,8 @@ public class CameraControl : MonoBehaviour {
 		}
 		curPos = this.transform.position;
 		destPos = location;
+		destPos.y += .5f;
+		destPos.z -= .3f;
 		
 		StartCoroutine(MoveToTarget());
 			//curPos = destPos;
@@ -47,7 +55,7 @@ public class CameraControl : MonoBehaviour {
 	}
 	
 	IEnumerator MoveToTarget() {
-  		
+  		isMoving = true;
 		float i = 0.0f;
   		while (i < 1.0f) {
     		transform.position = Vector3.Lerp(curPos, destPos, Mathf.SmoothStep(0,1,i));
@@ -55,6 +63,7 @@ public class CameraControl : MonoBehaviour {
     		i += Time.deltaTime;
     		yield return 0;
   		}
+		isMoving = false;
 	}
 	
 }

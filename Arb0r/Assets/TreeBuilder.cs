@@ -111,14 +111,21 @@ public class TreeBuilder : MonoBehaviour {
 	
 	void branch(GameObject node1, GameObject node2) { // connects all relationships with a cylinder
 		node1.transform.LookAt(node2.transform.localPosition);
-		GameObject c = (GameObject)Instantiate(Resources.Load("cylz"));
+		GameObject c = (GameObject)Instantiate(Resources.Load("cyl2"));
+		GameObject co = (GameObject)Instantiate(Resources.Load("co"));
 		Vector3 rot = new Vector3(node1.transform.rotation.x + 90, node1.transform.rotation.y, node1.transform.rotation.z);
 		c.transform.rotation = node1.transform.rotation;
 		c.transform.position = (node2.transform.position + node1.transform.position)/2;
 		c.transform.forward = c.transform.up;
-		int yScale = (int)(Vector3.Distance(node1.transform.position,node2.transform.position)/2.1);
-		Vector3 scale = new Vector3(1,yScale,1);
+		int yScale = (int)(Vector3.Distance(node1.transform.position,node2.transform.position) * 4);
+		Vector3 scale = new Vector3(5,yScale,5);
 		c.transform.localScale = scale;
+		co.transform.rotation = node1.transform.rotation;
+		co.transform.position = node2.transform.position;
+		
+		//co.transform.position = co.transform.position * (15/16);
+		co.transform.forward = co.transform.up;
+	
 		//Transform t = c.GetComponentInChildren<Transform>();
 		//t.localScale.y = (int)Vector3.Distance(node1.transform.position,node2.transform.position);
 	}
