@@ -110,9 +110,10 @@ public class TreeBuilder : MonoBehaviour {
 	}
 	
 	void branch(GameObject node1, GameObject node2) { // connects all relationships with a cylinder
+		
 		node1.transform.LookAt(node2.transform.localPosition);
 		GameObject c = (GameObject)Instantiate(Resources.Load("cyl2"));
-		GameObject co = (GameObject)Instantiate(Resources.Load("co"));
+		GameObject c2 = (GameObject)Instantiate(Resources.Load("cyl2"));
 		Vector3 rot = new Vector3(node1.transform.rotation.x + 90, node1.transform.rotation.y, node1.transform.rotation.z);
 		c.transform.rotation = node1.transform.rotation;
 		c.transform.position = (node2.transform.position + node1.transform.position)/2;
@@ -120,11 +121,29 @@ public class TreeBuilder : MonoBehaviour {
 		int yScale = (int)(Vector3.Distance(node1.transform.position,node2.transform.position) * 4);
 		Vector3 scale = new Vector3(5,yScale,5);
 		c.transform.localScale = scale;
-		co.transform.rotation = node1.transform.rotation;
-		co.transform.position = node2.transform.position;
+		
+		
+		//node1.transform.LookAt(node2.transform.localPosition);
+		//GameObject c = (GameObject)Instantiate(Resources.Load("cyl"));
+		//GameObject c2 = (GameObject)Instantiate(Resources.Load("cyl2"));
+		
+		
+		
+		GameObject co = (GameObject)Instantiate(Resources.Load("co"));
+		co.transform.rotation = c.transform.rotation;
+		co.transform.position = c.transform.position;
+		
+		/*
+		GameObject ps = (GameObject)Instantiate(Resources.Load("ps"));
+		ps.transform.rotation = c.transform.rotation;
+		ps.transform.position = (node2.transform.position + co.transform.position)/2;
+		*/
+		
+		//co.transform.RotateAround(Vector3.up,180);
+		
 		
 		//co.transform.position = co.transform.position * (15/16);
-		co.transform.forward = co.transform.up;
+		//co.transform.forward = co.transform.up;
 	
 		//Transform t = c.GetComponentInChildren<Transform>();
 		//t.localScale.y = (int)Vector3.Distance(node1.transform.position,node2.transform.position);

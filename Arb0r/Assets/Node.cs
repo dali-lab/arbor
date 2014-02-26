@@ -6,11 +6,14 @@ public class Node : MonoBehaviour {
 	public string name;
 	public Vector3 location;
 	CameraControl cc;
+	MiniCam mc;
 	
 	// Use this for initialization
 	void Start () {
 		GameObject go = GameObject.FindGameObjectWithTag("MainCamera");
 		cc = (CameraControl) go.GetComponent(typeof(CameraControl));
+		GameObject go2 = GameObject.FindGameObjectWithTag("Camera");
+		mc = (MiniCam) go2.GetComponent(typeof(MiniCam));
 	}
 	
 	// Update is called once per frame
@@ -26,7 +29,8 @@ public class Node : MonoBehaviour {
 	
 	void OnMouseDown () {
 		//BroadcastMessage("getTarget",location, SendMessageOptions.DontRequireReceiver);
-		cc.getTarget(location);
+		//cc.getTarget(location);
+		mc.getModel(name);
 	}
 	
 

@@ -9,7 +9,7 @@ public class CameraControl : MonoBehaviour {
 	float speed = 35f;
 	bool isMoving = false;
 	bool isClick = false;
-	
+
 	
 	// Use this for initialization
 	void Start () {
@@ -35,13 +35,12 @@ public class CameraControl : MonoBehaviour {
 	}
 	
 	public void getTarget(Vector3 location) {
-		
 		//destPos = location - transform.forward * 20;
 		if(curPos == startPos) {
 			this.transform.position = destPos;
 			curPos = destPos;
-
 		}
+		
 		curPos = this.transform.position;
 		destPos = location;
 		destPos.y += .5f;
@@ -51,7 +50,7 @@ public class CameraControl : MonoBehaviour {
 			//curPos = destPos;
 		
 		//this.transform.position.z += 3.0f;
-		
+			
 	}
 	
 	IEnumerator MoveToTarget() {
