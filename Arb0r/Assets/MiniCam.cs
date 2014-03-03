@@ -17,7 +17,7 @@ public class MiniCam : MonoBehaviour {
 	ArrayList labelList = new ArrayList();
 	public GUIText guiText;
 	int heightUnit = Screen.height/4;
-	int widthUnit = Screen.width - 50;
+	int widthUnit = Screen.width/16;
 	//Vector3 scale = new Vector3(.25f,.5f,.25f);
 	Hashtable nameXpos;
 	
@@ -26,6 +26,9 @@ public class MiniCam : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		//frame = (GUISkin)Resources.Load("frame");
+		
+		
+		
 		
 		Vector3 pos1 = new Vector3(100,100,101);
 		Vector3 pos2 = new Vector3(-100,100,101);
@@ -57,27 +60,27 @@ public class MiniCam : MonoBehaviour {
 		if(models.Count >= 1){
 			m = models[0];
 			string m1 = parseName(m.name);
-			GUI.Label(new Rect(widthUnit, 10, 100, 20), m1);
+			GUI.Label(new Rect(widthUnit * 15, 10, 100, 20), m1);
 			Vector3 pos = (Vector3)nameXpos[m1];
-			GUI.Label(new Rect(widthUnit - 225, 10, 100, 200), "X: " + pos.x + "\nTime: " + pos.y + "\nZ: " + pos.z);
+			GUI.Label(new Rect(widthUnit * 11.5f, 10, 100, 200), "X: " + pos.x + "\nTime: " + pos.y + "\nZ: " + pos.z);
 			if(models.Count >= 2) {
 				m = models[1];
 				string m2 = parseName(m.name);
-				GUI.Label(new Rect(widthUnit, heightUnit, 100, 20), m2);
+				GUI.Label(new Rect(widthUnit * 15, heightUnit, 100, 20), m2);
 				pos = (Vector3)nameXpos[m2];
-				GUI.Label(new Rect(widthUnit - 225, heightUnit, 100, 200), "X: " + pos.x + "\nTime: " + pos.y + "\nZ: " + pos.z);
+				GUI.Label(new Rect(widthUnit * 11.5f, heightUnit, 100, 200), "X: " + pos.x + "\nTime: " + pos.y + "\nZ: " + pos.z);
 				if(models.Count >= 3) {
 					m = models[2];
 					string m3 = parseName(m.name);
-					GUI.Label(new Rect(widthUnit, heightUnit * 2, 100, 20), m3);
+					GUI.Label(new Rect(widthUnit * 15, heightUnit * 2, 100, 20), m3);
 					pos = (Vector3)nameXpos[m3];
-					GUI.Label(new Rect(widthUnit - 225, (heightUnit * 2), 100, 200), "X: " + pos.x + "\nTime: " + pos.y + "\nZ: " + pos.z);
+					GUI.Label(new Rect(widthUnit * 11.5f, (heightUnit * 2), 100, 200), "X: " + pos.x + "\nTime: " + pos.y + "\nZ: " + pos.z);
 					if(models.Count == 4) {
 						m = models[3];
 						string m4 = parseName(m.name);
-						GUI.Label(new Rect(widthUnit, heightUnit * 3, 100, 20), m4);
+						GUI.Label(new Rect(widthUnit * 15, heightUnit * 3, 100, 20), m4);
 						pos = (Vector3)nameXpos[m4];
-						GUI.Label(new Rect(widthUnit - 225, (heightUnit * 3), 100, 200), "X: " + pos.x + "\nTime: " + pos.y + "\nZ: " + pos.z);					}
+						GUI.Label(new Rect(widthUnit * 11.5f, (heightUnit * 3), 100, 200), "X: " + pos.x + "\nTime: " + pos.y + "\nZ: " + pos.z);					}
 				}
 			}
 		}
