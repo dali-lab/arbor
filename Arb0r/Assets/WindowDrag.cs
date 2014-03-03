@@ -27,6 +27,9 @@ public class WindowDrag : MonoBehaviour {
 
 	bool displayXValues;
 	bool displayYValues;
+	
+	private Vector3 preOrthoPos = new Vector3(6,9,-10);
+	Vector3 orthoPos = new Vector3(1.3f,15f,1.5f);
 
 	private Vector2 scrollPosition;
 	
@@ -86,12 +89,24 @@ public class WindowDrag : MonoBehaviour {
 	//function for switching to orthographic view;
 	void switchToOrtho () {
 		//switch to ortho
+		//preOrthoPos = this.transform.position;
+		
+		//this.transform.position = orthoPos;
+		//this.transform.Rotate(Vector3.right, 90);
+		this.camera.transform.position = orthoPos;
+		//this.camera.isOrthoGraphic = true;
+		//this.camera.orthographicSize = 10;
+		Vector3 lookAtPos = new Vector3(1.3f,0f,1.5f);
+		this.camera.transform.LookAt(lookAtPos);
 	}
 
 	//function for reseting the view based off of X and Y variables
 	void resetView (){
 		selectedX = newXValue;
 		selectedY = newYValue;
+		
+		this.transform.position = preOrthoPos;
+		//this.camera.isOrthoGraphic = false;
 
 		/* PUT CODE HERE
 		 * to reset the position of the camera at the base node

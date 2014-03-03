@@ -31,6 +31,7 @@ public class Node : MonoBehaviour {
 		//BroadcastMessage("getTarget",location, SendMessageOptions.DontRequireReceiver);
 		//cc.getTarget(location);
 		mc.getModel(name);
+		print(name);
 	}
 	
 

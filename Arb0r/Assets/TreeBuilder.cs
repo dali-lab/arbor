@@ -5,7 +5,7 @@ using System.Linq;
 public class TreeBuilder : MonoBehaviour {
 	
 	//SortedList<string, Node> nameXnode = new SortedList<string, Node>();
-	Hashtable nameXnode = new Hashtable();
+	Hashtable nameXpos;
 	Hashtable nameXGameObj = new Hashtable();
 	public ArrayList relations = new ArrayList();
 	ArrayList nameList = new ArrayList();
@@ -13,76 +13,24 @@ public class TreeBuilder : MonoBehaviour {
 	//public string[] relations;
 	private string string1;
 	private string string2;
+	private Vector3 posScale = new Vector3(4,2,4);
+
 
 	// Use this for initialization
+
+	public Hashtable getNameXPos(){
+		return nameXpos;
+	}
+	
 	void Start () {
 		
-		//TESTING ... follow the pattern to mock up a sweet tree!
-		Vector3 pos1 = new Vector3(4,8,8);
-		Vector3 pos2 = new Vector3(4,4,8);
-		Vector3 pos3 = new Vector3(8,8,10);
-		Vector3 pos4 = new Vector3(8,4,10);
-		Vector3 pos5 = new Vector3(2,2,10);
-		Vector3 pos6 = new Vector3(1,4,2);
-		Vector3 pos7 = new Vector3(4,5,0);
-		Vector3 pos8 = new Vector3(4,1,1);
-		Vector3 pos9 = new Vector3(1,1,0);
+		Parser p = new Parser();
+		p.readFromFile("data2.dta");
+		p.testPublicFunctions();
 		
-		posList.Add(pos1);
-		posList.Add(pos2);
-		posList.Add(pos3);
-		posList.Add(pos4);
-		posList.Add(pos5);
-		posList.Add(pos6);
-		posList.Add(pos7);
-		posList.Add(pos8);
-		posList.Add(pos9);
+		relations = p.getRelations();
+		nameXpos = p.getNameXPos();
 		
-		
-		
-		string relation1 = "sp1/sp2";       
-		string relation2 = "sp2/nodeA";
-		string relation3 = "sp3/sp4";
-		string relation4 = "sp4/sp5";
-		string relation5 = "sp5/nodeC";
-		string relation6 = "nodeA/sp3";
-		string relation7 = "sp3/nodeB";
-		
-		
-		relations.Add(relation1);
-		relations.Add(relation2);
-		relations.Add(relation3);
-		relations.Add(relation4);
-		relations.Add(relation5);
-		relations.Add(relation6);
-		relations.Add(relation7);
-		
-		/*
-		Node n1 = new Node("sp1" , pos1);
-		Node n2 = new Node("sp2" , pos2);
-		Node n3 = new Node("sp3" , pos3);
-		Node n4 = new Node("sp4" , pos4);
-		Node n5 = new Node("sp5" , pos5);
-		Node n6 = new Node("nodeA" , pos6);
-		Node n7 = new Node("nodeB" , pos7);
-		Node n8 = new Node("nodeC" , pos8);
-		Node n9 = new Node("nodeD" , pos9);
-		
-		
-		nameXnode[n1.name] = n1;
-		nameXnode[n2.name] = n2;
-		nameXnode[n3.name] = n3;
-		nameXnode[n4.name] = n4;
-		nameXnode[n5.name] = n5;
-		nameXnode[n6.name] = n6;
-		nameXnode[n7.name] = n7;
-		nameXnode[n8.name] = n8;
-		//nameXnode[n9.name] = n9;
-		*/
-		
-		//End of Test
-		
-		int i = 0;
 		foreach(string str in relations){ // loop that parses all the relations from relations[]
 			int l = str.IndexOf("/");
 			string1 = str.Substring(0,l);
@@ -90,17 +38,18 @@ public class TreeBuilder : MonoBehaviour {
 			
 			if(!nameList.Contains(string1)){
 				nameList.Add(string1);
-				this.makeNode(string1,i);
-				i++;
+				this.makeNode(string1);
+				
 			}
 			if(!nameList.Contains(string2)){
 				nameList.Add(string2);
-				this.makeNode(string2,i);
-				i++;
+				this.makeNode(string2);
+				
 			}
 			branch((GameObject)nameXGameObj[string1],(GameObject)nameXGameObj[string2]);
 			
 		}
+
 		
 	}
 	
@@ -122,16 +71,18 @@ public class TreeBuilder : MonoBehaviour {
 		Vector3 scale = new Vector3(5,yScale,5);
 		c.transform.localScale = scale;
 		
+		/*
+		float halfY = (node2.transform.position.y - node1.transform.position.y)/2;
+		Vector3 c2Pos = new Vector3(node2.transform.position.x, halfY, node2.transform.position.z);
+		c2.transform.position = c2Pos;
+		*/
 		
-		//node1.transform.LookAt(node2.transform.localPosition);
-		//GameObject c = (GameObject)Instantiate(Resources.Load("cyl"));
-		//GameObject c2 = (GameObject)Instantiate(Resources.Load("cyl2"));
-		
-		
-		
+		/*
 		GameObject co = (GameObject)Instantiate(Resources.Load("co"));
 		co.transform.rotation = c.transform.rotation;
 		co.transform.position = c.transform.position;
+		*/
+		
 		
 		/*
 		GameObject ps = (GameObject)Instantiate(Resources.Load("ps"));
@@ -149,11 +100,13 @@ public class TreeBuilder : MonoBehaviour {
 		//t.localScale.y = (int)Vector3.Distance(node1.transform.position,node2.transform.position);
 	}
 	
-	void makeNode(string str, int i) {
+	void makeNode(string str) {
 		GameObject shape = (GameObject)Instantiate(Resources.Load(str));
 		Node node = shape.gameObject.AddComponent<Node>();
 		node.name = str;
-		node.location = (Vector3)posList[i];
+		Vector3 pos = (Vector3)nameXpos[str];
+		pos.Scale(posScale);
+		node.location = pos;
 		shape.transform.position = node.location;
 		//shape.transform.localScale = new Vector3(20,20,20);
 		nameXGameObj[str] = shape;

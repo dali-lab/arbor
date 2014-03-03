@@ -13,12 +13,11 @@ public class MainCameraToggle : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKey(KeyCode.Space)){
+		if(Input.GetKeyDown(KeyCode.Space)){
 			mouseMoveEnabled = !mouseMoveEnabled;
 			this.GetComponent<MouseLook>().enabled = mouseMoveEnabled;
 			this.GetComponent<CharacterMotor>().enabled = mouseMoveEnabled;
-			
-			
+
 			if(mouseMoveEnabled == true)
 				print ("Camera Enabled");
 		
