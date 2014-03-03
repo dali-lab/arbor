@@ -46,9 +46,13 @@
   <ItemGroup>
      <Compile Include="Assets\Branch.cs" />
      <Compile Include="Assets\CameraControl.cs" />
+     <Compile Include="Assets\MainCameraToggle.cs" />
+     <Compile Include="Assets\MiniCam.cs" />
      <Compile Include="Assets\Node.cs" />
+     <Compile Include="Assets\Parser.cs" />
      <Compile Include="Assets\SimpleGraph.cs" />
      <Compile Include="Assets\TreeBuilder.cs" />
+     <Compile Include="Assets\WindowDrag.cs" />
  <Reference Include="Library\ScriptAssemblies\Assembly-UnityScript-firstpass">
  <HintPath>Library\ScriptAssemblies\Assembly-UnityScript-firstpass.dll</HintPath>
  </Reference>
