@@ -17,6 +17,8 @@ public class Parser
 	private string fileName;
 	private string fileContents;
 	private string newickString;
+	private string parent_node;
+
 	//private string nodePos;
 	//a dictionary of varibale positions for each node. 
 	private Dictionary<string, float[] > dictionary = new Dictionary<string, float[]> ();
@@ -49,7 +51,7 @@ public class Parser
 	public void testPublicFunctions ()
 	{
 		foreach (string relation in getRelations()) {
-			Debug.Log ("RELATION: " + relation);
+			//Debug.Log ("RELATION: " + relation);
 		}
 		foreach (string element in getNodeNames()) {
 			//Debug.Log ("ELEMENT: " + element);
@@ -58,7 +60,7 @@ public class Parser
 			nameXpos.Add(element,pos);
 		}
 		foreach (string variable in getVariableNames()) {
-			Debug.Log ("VARIABLE: " + variable);
+			//Debug.Log ("VARIABLE: " + variable);
 		}
 
 	}
@@ -93,6 +95,17 @@ public class Parser
 		Vector3 r = new Vector3 (returnee [variableIndex], timePositionForNode (node), returnee [variableIndex2]);
 		return r; 
 	}
+
+
+	//gets the position of the parent node given the non-time variables we want to plot it with
+	public Vector3 getPositionOfParentNodeWithVariableIndices (int variableIndex, int variableIndex2){
+	
+		return getPositionOfNodeWithVariableIndices(parent_node,variableIndex,variableIndex2);
+	}
+
+
+
+
 	private float timePositionForNode (string s)
 	{
 		float accum = 0.0f;
@@ -114,6 +127,10 @@ public class Parser
 			if (parent != "") {
 				relations.Add (parent + "/" + element);
 				//	Debug.Log(parent+"/"+element);
+			}
+			else{
+				parent_node = element;
+				//Debug.Log("PARENT OF ALL NODES: "+parent_node);
 			}
 		}
 	}
