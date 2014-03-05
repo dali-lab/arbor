@@ -62,7 +62,7 @@ public class TreeBuilder : MonoBehaviour {
 		
 		node1.transform.LookAt(node2.transform.localPosition);
 		GameObject c = (GameObject)Instantiate(Resources.Load("cyl2"));
-		GameObject c2 = (GameObject)Instantiate(Resources.Load("cyl2"));
+	//	GameObject c2 = (GameObject)Instantiate(Resources.Load("cyl2"));
 		Vector3 rot = new Vector3(node1.transform.rotation.x + 90, node1.transform.rotation.y, node1.transform.rotation.z);
 		c.transform.rotation = node1.transform.rotation;
 		c.transform.position = (node2.transform.position + node1.transform.position)/2;
