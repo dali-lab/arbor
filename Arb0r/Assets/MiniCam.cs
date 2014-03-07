@@ -20,15 +20,30 @@ public class MiniCam : MonoBehaviour {
 	int widthUnit = Screen.width/16;
 	//Vector3 scale = new Vector3(.25f,.5f,.25f);
 	Hashtable nameXpos;
+	float speed = Screen.height/4;
+	Vector3 mouseVec;
+	float xVal = (float)(.7f * Screen.width);
+	float yVal = (float)(Screen.height/4);
+	float wVal = (float)(.3f * Screen.width);
+	float hVal = (float)(Screen.height/4);
 	
+	Rect cam1;
+	Rect cam2;
+	Rect cam3;
+	Rect cam4;
 	
+	int modelIndex = -1;
+	bool isRotating = false;
+
 	
 	// Use this for initialization
 	void Start () {
 		//frame = (GUISkin)Resources.Load("frame");
 		
-		
-		
+		cam1 = new Rect(xVal, yVal * 3, wVal, hVal);
+		cam2 = new Rect(xVal, yVal * 2, wVal, hVal);
+		cam3 = new Rect(xVal, yVal, wVal, hVal);
+		cam4 = new Rect(xVal, .005f, wVal, hVal);
 		
 		Vector3 pos1 = new Vector3(100,100,101);
 		Vector3 pos2 = new Vector3(-100,100,101);
@@ -122,10 +137,38 @@ public class MiniCam : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		this.camera.enabled = cameraOn;
-		foreach(GameObject go in models) {
-			go.transform.Rotate(-Vector3.up, Time.deltaTime * 10);
+		this.camera.enabled = cameraOn;	
+		
+		if(!isRotating && Input.GetMouseButtonDown(0)){
+			if(cam1.Contains(Input.mousePosition)){
+				modelIndex = 0;	
+			}
+			if(cam2.Contains(Input.mousePosition)){
+				modelIndex = 1;		
+			}
+			if(cam3.Contains(Input.mousePosition)){
+				modelIndex = 2;		
+			}
+			if(cam4.Contains(Input.mousePosition)){
+				modelIndex = 3;		
+			}
 		}
+		
+		
+		if(Input.GetMouseButton(0)){
+			mouseVec = new Vector3(Input.GetAxis("Mouse X") , Input.GetAxis("Mouse Y"), 0);
+			if(modelIndex != -1 && modelIndex < models.Count){
+			GameObject go = (GameObject)models[modelIndex];
+			go.transform.Rotate(mouseVec, Time.deltaTime * speed);
+			isRotating = true;
+			}
+		}
+		
+		if(Input.GetMouseButtonUp(0)){
+			isRotating = false;
+			modelIndex = -1;
+		}
+			
 
 	
 	}
