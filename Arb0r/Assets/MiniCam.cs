@@ -55,9 +55,15 @@ public class MiniCam : MonoBehaviour {
 		posList.Add(pos3);
 		posList.Add(pos4);
 		
-		Parser p = new Parser();
-		p.readFromFile("data2.dta");
-		p.testPublicFunctions();
+		//here's how to create a parser
+		Parser p = (Parser) GameObject.FindObjectOfType(typeof(Parser)); // returns the first object of this type
+		if (p == null) {
+			p = gameObject.AddComponent<Parser>();
+			Debug.Log("MADE A NEW PARSER");
+		}
+
+		//p.readFromFile("data2.dta");
+		//p.testPublicFunctions();
 		nameXpos = p.getNameXPos();
 		foreach(string name in nameXpos.Keys){
 			print(nameXpos[name] + " -- " + name);	

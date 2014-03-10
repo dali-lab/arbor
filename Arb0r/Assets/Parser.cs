@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-public class Parser
+public class Parser : MonoBehaviour
 {
 	//relationships between nodes, in the format: "child/parent"
 	private ArrayList relations = new ArrayList ();

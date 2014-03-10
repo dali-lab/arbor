@@ -23,8 +23,15 @@ public class TreeBuilder : MonoBehaviour {
 	}
 	
 	void Start () {
-		
-		Parser p = new Parser();
+
+
+		//here's how to create a parser
+		Parser p = (Parser) GameObject.FindObjectOfType(typeof(Parser)); // returns the first object of this type
+		if (p == null) {
+			p = gameObject.AddComponent<Parser>();
+			Debug.Log("MADE A NEW PARSER");
+		}
+
 		p.readFromFile("data2.dta");
 		p.testPublicFunctions();
 		
