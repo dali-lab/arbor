@@ -97,7 +97,7 @@ public class Parser : MonoBehaviour
 		
 		for (int i =0; i<variableNames.Length; i++) {
 
-			if(variableNames[i] == s)
+			if(string.Equals(variableNames[i],s))
 				return i;
 		}
 		return -1;
