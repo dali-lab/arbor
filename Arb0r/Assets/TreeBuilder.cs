@@ -32,7 +32,7 @@ public class TreeBuilder : MonoBehaviour {
 			Debug.Log("MADE A NEW PARSER");
 		}
 
-		p.readFromFile("data2.dta");
+		p.readFromFile("/Users/nook/Documents/git/arbor/Arb0r/Assets/data2.dta");
 		p.testPublicFunctions();
 		
 		relations = p.getRelations();

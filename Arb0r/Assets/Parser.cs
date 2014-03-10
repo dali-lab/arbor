@@ -35,7 +35,7 @@ public class Parser : MonoBehaviour
 	public void readFromFile (string s)
 	{
 		
-		var sr = new StreamReader (Application.dataPath + "/" + s);
+		var sr = new StreamReader (s);
 		sr.ReadLine ();
 		newickString = sr.ReadLine ();
 
