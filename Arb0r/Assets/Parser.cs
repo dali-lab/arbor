@@ -93,7 +93,7 @@ public class Parser : MonoBehaviour
 		
 	}
 
-	private int getVariableIndex(string s){
+	public int getVariableIndex(string s){
 		
 		for (int i =0; i<variableNames.Length; i++) {
 
