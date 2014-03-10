@@ -3,8 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-
 public class Parser : MonoBehaviour
+
 {
 	//relationships between nodes, in the format: "child/parent"
 	private ArrayList relations = new ArrayList ();
@@ -18,6 +18,9 @@ public class Parser : MonoBehaviour
 	private string fileContents;
 	private string newickString;
 	private string parent_node;
+
+	private string var1;
+	private string var2;
 
 	//private string nodePos;
 	//a dictionary of varibale positions for each node. 
@@ -64,8 +67,44 @@ public class Parser : MonoBehaviour
 		}
 
 	}
+
+
+	public void setVariable1Name (string s){
+		
+		var1 = s;
+		
+	}
 	
-	public ArrayList getVariableNames ()
+	public void setVariable2Name(string s){
+		
+		var2 = s;
+		
+	}
+
+	public string getVariable1Name(){
+
+		return var1;
+
+	}
+
+	public string getVariable2Name(){
+		
+		return var2;
+		
+	}
+
+	private int getVariableIndex(string s){
+		
+		for (int i =0; i<variableNames.Length; i++) {
+
+			if(variableNames[i] == s)
+				return i;
+		}
+		return -1;
+		
+	}
+
+	public ArrayList getVariableNames()
 	{
 		ArrayList list = new ArrayList (variableNames);
 		return list;
