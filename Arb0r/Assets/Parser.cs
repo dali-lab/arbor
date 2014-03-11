@@ -63,7 +63,7 @@ public class Parser : MonoBehaviour
 		}
 		foreach (string element in getNodeNames()) {
 			//Debug.Log ("ELEMENT: " + element);
-			Vector3 pos = getPositionOfNodeWithVariableIndices (element, 0, 1);
+			Vector3 pos = getPositionOfNodeWithVariableIndices (element, getVariableIndex(getVariable1Name()), getVariableIndex(getVariable2Name()));
 			//Debug.Log ("\tPos: " + pos);
 			nameXpos.Add(element,pos);
 		}
