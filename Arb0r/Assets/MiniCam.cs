@@ -34,6 +34,7 @@ public class MiniCam : MonoBehaviour {
 	
 	int modelIndex = -1;
 	bool isRotating = false;
+	Parser p;
 
 	
 	// Use this for initialization
@@ -56,7 +57,7 @@ public class MiniCam : MonoBehaviour {
 		posList.Add(pos4);
 		
 		//here's how to create a parser
-		Parser p = (Parser) GameObject.FindObjectOfType(typeof(Parser)); // returns the first object of this type
+		p = (Parser) GameObject.FindObjectOfType(typeof(Parser)); // returns the first object of this type
 		if (p == null) {
 			p = gameObject.AddComponent<Parser>();
 			Debug.Log("MADE A NEW PARSER");
@@ -83,25 +84,25 @@ public class MiniCam : MonoBehaviour {
 			string m1 = parseName(m.name);
 			GUI.Label(new Rect(widthUnit * 15, 10, 100, 20), m1);
 			Vector3 pos = (Vector3)nameXpos[m1];
-			GUI.Label(new Rect(widthUnit * 11.5f, 10, 100, 200), "X: " + pos.x + "\nTime: " + pos.y + "\nZ: " + pos.z);
+			GUI.Label(new Rect(widthUnit * 11.5f, 10, 100, 200), p.getVariable1Name()+": " + pos.x + "\nTime: " + pos.y + "\n"+p.getVariable2Name()+": " + pos.z);
 			if(models.Count >= 2) {
 				m = models[1];
 				string m2 = parseName(m.name);
 				GUI.Label(new Rect(widthUnit * 15, heightUnit, 100, 20), m2);
 				pos = (Vector3)nameXpos[m2];
-				GUI.Label(new Rect(widthUnit * 11.5f, heightUnit, 100, 200), "X: " + pos.x + "\nTime: " + pos.y + "\nZ: " + pos.z);
+				GUI.Label(new Rect(widthUnit * 11.5f, heightUnit, 100, 200), p.getVariable1Name()+": " + pos.x + "\nTime: " + pos.y + "\n"+p.getVariable2Name()+": " + pos.z);
 				if(models.Count >= 3) {
 					m = models[2];
 					string m3 = parseName(m.name);
 					GUI.Label(new Rect(widthUnit * 15, heightUnit * 2, 100, 20), m3);
 					pos = (Vector3)nameXpos[m3];
-					GUI.Label(new Rect(widthUnit * 11.5f, (heightUnit * 2), 100, 200), "X: " + pos.x + "\nTime: " + pos.y + "\nZ: " + pos.z);
+					GUI.Label(new Rect(widthUnit * 11.5f, (heightUnit * 2), 100, 200), p.getVariable1Name()+": " + pos.x + "\nTime: " + pos.y + "\n"+p.getVariable2Name()+": " + pos.z);
 					if(models.Count == 4) {
 						m = models[3];
 						string m4 = parseName(m.name);
 						GUI.Label(new Rect(widthUnit * 15, heightUnit * 3, 100, 20), m4);
 						pos = (Vector3)nameXpos[m4];
-						GUI.Label(new Rect(widthUnit * 11.5f, (heightUnit * 3), 100, 200), "X: " + pos.x + "\nTime: " + pos.y + "\nZ: " + pos.z);					}
+						GUI.Label(new Rect(widthUnit * 11.5f, (heightUnit * 3), 100, 200), p.getVariable1Name()+": " + pos.x + "\nTime: " + pos.y + "\n"+p.getVariable2Name()+": " + pos.z);					}
 				}
 			}
 		}

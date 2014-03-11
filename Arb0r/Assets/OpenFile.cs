@@ -61,6 +61,7 @@ public class OpenFile : MonoBehaviour {
 			p = gameObject.AddComponent<Parser>();
 			Debug.Log("MADE A NEW PARSER");
 		}
+	//	Object.DontDestroyOnLoad (p);
 		
 		WIDTH = Screen.width;
 		HEIGHT = Screen.height;

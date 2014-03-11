@@ -34,6 +34,11 @@ public class Parser : MonoBehaviour
 	{
 	
 	}
+
+	void Awake ()
+	{
+		DontDestroyOnLoad (this);	
+	}
 	
 	public void readFromFile (string s)
 	{
