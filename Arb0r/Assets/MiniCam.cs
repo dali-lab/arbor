@@ -164,9 +164,10 @@ public class MiniCam : MonoBehaviour {
 		
 		if(Input.GetMouseButton(0)){
 			mouseVec = new Vector3(Input.GetAxis("Mouse X") , Input.GetAxis("Mouse Y"), 0);
+			print ("MOUSE VEC: " + mouseVec);
 			if(modelIndex != -1 && modelIndex < models.Count){
 			GameObject go = (GameObject)models[modelIndex];
-			go.transform.Rotate(mouseVec, Time.deltaTime * speed);
+			go.transform.Rotate(-mouseVec, Time.deltaTime * speed);
 			isRotating = true;
 			}
 		}

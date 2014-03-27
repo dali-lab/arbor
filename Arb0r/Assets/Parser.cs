@@ -40,6 +40,21 @@ public class Parser : MonoBehaviour
 		DontDestroyOnLoad (this);	
 	}
 	
+//	public void clearData (){
+//		variableNames = "";
+//		fileName = "";
+//		fileContents = "";
+//		newickString = "";
+//		parent_node = "";
+//		var1 = "";
+//		var2 = "";
+//		dictionary = new Dictionary<string, float[]> ();
+//		relations = new ArrayList ();
+//		nodeNames = new ArrayList ();
+//	    nameXpos = new Hashtable();
+//		
+//	}
+	
 	public void readFromFile (string s)
 	{
 		

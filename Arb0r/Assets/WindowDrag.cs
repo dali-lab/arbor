@@ -10,7 +10,7 @@ public class WindowDrag : MonoBehaviour {
 	int buttonHeight; // standard height of buttons (textsize + buffer)
 	int menuWidth; // == buttonWidth + bigBuffer
 	int menuTextSize; //same as GUI_Unit.
-	int sideX; // the distance of a button from the side of the screen.
+	public int sideX; // the distance of a button from the side of the screen.
 
 	string XbuttonText; //the text that will be displayed on the X Button
 	string YbuttonText;
@@ -28,8 +28,12 @@ public class WindowDrag : MonoBehaviour {
 	bool displayXValues;
 	bool displayYValues;
 	
-	private Vector3 preOrthoPos = new Vector3(6,9,-10);
-	Vector3 orthoPos = new Vector3(1.3f,15f,1.5f);
+	private Parser p;
+	
+	private Transform preOrthoTransform;
+	Vector3 orthoPos;
+	Vector3 posScale = new Vector3(4,2,4);
+	bool inOrtho = false;
 
 	private Vector2 scrollPosition;
 	
@@ -55,7 +59,7 @@ public class WindowDrag : MonoBehaviour {
 		int y = bigBuff + smallBuff;
 
 		//draw the box to contain the menu
-		GUI.Box (new Rect(bigBuff, bigBuff, menuWidth, ((buttonHeight*4) + (smallBuff*5)) ), "");
+		GUI.Box (new Rect(bigBuff, bigBuff, menuWidth, ((buttonHeight*5) + (smallBuff*6)) ), "");
 
 
 		if (GUI.Button (new Rect(sideX, y, buttonWidth, buttonHeight), "<size=" + menuTextSize +">" + XbuttonText + "</size>"))
@@ -73,7 +77,7 @@ public class WindowDrag : MonoBehaviour {
 		}
 
 
-		if (GUI.Button (new Rect(sideX, (y+= (buttonHeight + smallBuff)), buttonWidth, buttonHeight), "<size=" + menuTextSize +">Reset</size>"))
+		if (GUI.Button (new Rect(sideX, (y += (buttonHeight + smallBuff)), buttonWidth, buttonHeight), "<size=" + menuTextSize +">Reset</size>"))
 		{
 			resetView ();
 		}
@@ -81,6 +85,10 @@ public class WindowDrag : MonoBehaviour {
 		if (GUI.Button (new Rect(sideX, (y += (buttonHeight + smallBuff)), buttonWidth, buttonHeight), "<size=" + menuTextSize + ">Ortho</size>"))
 		{
 			switchToOrtho();
+		}
+		if (GUI.Button (new Rect(sideX, (y += (buttonHeight + smallBuff)), buttonWidth, buttonHeight), "<size=" + menuTextSize + ">Back</size>"))
+		{
+			Application.LoadLevel("OpenScreen");
 		}
 
 
@@ -90,14 +98,18 @@ public class WindowDrag : MonoBehaviour {
 	void switchToOrtho () {
 		//switch to ortho
 		//preOrthoPos = this.transform.position;
-		
+		if(!inOrtho){
+		preOrthoTransform = this.camera.transform;
 		//this.transform.position = orthoPos;
 		//this.transform.Rotate(Vector3.right, 90);
+		orthoPos.Scale(posScale);
 		this.camera.transform.position = orthoPos;
-		//this.camera.isOrthoGraphic = true;
-		//this.camera.orthographicSize = 10;
-		Vector3 lookAtPos = new Vector3(1.3f,0f,1.5f);
+		this.camera.isOrthoGraphic = true;
+		this.camera.orthographicSize = 10;
+		Vector3 lookAtPos = p.getPositionOfParentNodeWithVariableIndices(0,1);
 		this.camera.transform.LookAt(lookAtPos);
+		inOrtho = true;
+		}
 	}
 
 	//function for reseting the view based off of X and Y variables
@@ -105,8 +117,10 @@ public class WindowDrag : MonoBehaviour {
 		selectedX = newXValue;
 		selectedY = newYValue;
 		
-		this.transform.position = preOrthoPos;
-		//this.camera.isOrthoGraphic = false;
+		this.transform.localRotation = preOrthoTransform.localRotation;
+		this.transform.position = preOrthoTransform.position;
+		this.camera.isOrthoGraphic = false;
+		inOrtho = false;
 
 		/* PUT CODE HERE
 		 * to reset the position of the camera at the base node
@@ -197,6 +211,16 @@ public class WindowDrag : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
+		
+		p = (Parser) GameObject.FindObjectOfType(typeof(Parser)); // returns the first object of this type
+		if (p == null) {
+			p = gameObject.AddComponent<Parser>();
+			Debug.Log("MADE A NEW PARSER");
+		}
+		orthoPos = p.getPositionOfParentNodeWithVariableIndices(0,1);
+		orthoPos.y = 10;
+		print (orthoPos);
+		
 		GUI_Unit = (int)(Screen.width / 64);
 		smallBuff = GUI_Unit / 4;
 		bigBuff = GUI_Unit / 2;

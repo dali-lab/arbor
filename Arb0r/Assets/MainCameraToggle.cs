@@ -5,22 +5,21 @@ public class MainCameraToggle : MonoBehaviour {
 	
 	bool mouseMoveEnabled = true;
 	bool pointAndClick = false;
-	int width = Screen.width/32;
-	int height = Screen.height/5;
 	string label = "Camera Enabled";
+	WindowDrag wd;
+	int xSide;
 	
 	// Use this for initialization
 	
 	void OnGUI(){
-		GUI.Label(new Rect(width,height, 100, 20), label);
+		GUI.Box(new Rect(xSide,Screen.height - 30, 120, 30 - xSide), label);
 	}
 	
 	
 	void Start () {
-
-		
-		
-		
+		GameObject go = GameObject.FindGameObjectWithTag("MainCamera");
+		wd = (WindowDrag)go.GetComponent<WindowDrag>();
+		xSide = wd.sideX;
 	}
 	
 	// Update is called once per frame

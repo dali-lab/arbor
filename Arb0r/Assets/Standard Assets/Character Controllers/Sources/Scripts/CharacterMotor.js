@@ -24,6 +24,7 @@ class CharacterMotorMovement {
 	var maxForwardSpeed : float = 10.0;
 	var maxSidewaysSpeed : float = 10.0;
 	var maxBackwardsSpeed : float = 10.0;
+	var maxVerticalSpeed : float = 10.0;
 	
 	// Curve for multiplying speed based on slope (negative = downwards)
 	var slopeSpeedMultiplier : AnimationCurve = AnimationCurve(Keyframe(-90, 1), Keyframe(0, 1), Keyframe(90, 0));
@@ -569,7 +570,7 @@ function MaxSpeedInDirection (desiredMovementDirection : Vector3) : float {
 		return 0;
 	else {
 		var zAxisEllipseMultiplier : float = (desiredMovementDirection.z > 0 ? movement.maxForwardSpeed : movement.maxBackwardsSpeed) / movement.maxSidewaysSpeed;
-		var temp : Vector3 = new Vector3(desiredMovementDirection.x, 0, desiredMovementDirection.z / zAxisEllipseMultiplier).normalized;
+		var temp : Vector3 = new Vector3(desiredMovementDirection.x, desiredMovementDirection.y, desiredMovementDirection.z / zAxisEllipseMultiplier).normalized;
 		var length : float = new Vector3(temp.x, 0, temp.z * zAxisEllipseMultiplier).magnitude * movement.maxSidewaysSpeed;
 		return length;
 	}

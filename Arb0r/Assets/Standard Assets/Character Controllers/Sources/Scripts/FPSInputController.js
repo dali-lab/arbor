@@ -8,7 +8,7 @@ function Awake () {
 // Update is called once per frame
 function Update () {
 	// Get the input vector from kayboard or analog stick
-	var directionVector = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+	var directionVector = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Elevate"), Input.GetAxis("Vertical"));
 	
 	if (directionVector != Vector3.zero) {
 		// Get the length of the directon vector and then normalize it

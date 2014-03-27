@@ -20,13 +20,29 @@ public class CameraControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		float yMovement = 0;
+		Vector3 moveVec = this.transform.position;
 		if(isMoving == false) {
 			if(Input.GetKey(KeyCode.D))
 				transform.Rotate(Vector3.up * speed * Time.deltaTime);
 			if(Input.GetKey(KeyCode.A))
 				transform.Rotate(-Vector3.up * speed * Time.deltaTime);
 		}
-
+		/*
+		if(Input.GetKey(KeyCode.Q)){
+			yMovement += 0.5f * Time.deltaTime;
+			print(yMovement);
+			moveVec.y = yMovement;
+		}
+		if(Input.GetKey(KeyCode.E)){
+			yMovement -= 0.5f * Time.deltaTime;
+			moveVec.y = yMovement;
+			print(yMovement);
+		}
+		this.transform.position = moveVec;
+		
+			
+		 */
 		
 	}
 	

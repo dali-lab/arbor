@@ -126,7 +126,7 @@ public class OpenFile : MonoBehaviour {
 		}
 
 
-		if (GUI.Button(new Rect(btnLoad_x, btnLoad_y, btnLoad_W, btnLoad_H), "Load Data", btnLoadStyle))
+		if (GUI.Button(new Rect(btnLoad_x, btnLoad_y, btnLoad_W, btnLoad_H), "", btnLoadStyle))
 		{
 
 			path = EditorUtility.OpenFilePanel(
@@ -142,19 +142,19 @@ public class OpenFile : MonoBehaviour {
 
 		if (path != "")
 		{
-			if (GUI.Button (new Rect(btnSelX_x, btnSelX_y, btnSelX_W, btnSelX_H), "Select X Var", btnSelXStyle))
+			if (GUI.Button (new Rect(btnSelX_x, btnSelX_y, btnSelX_W, btnSelX_H), "", btnSelXStyle))
 				{
 				drawXMenu = true;
 				}
 
-			if (GUI.Button (new Rect(btnSelY_x, btnSelY_y, btnSelY_W, btnSelY_H), "Select Y Var", btnSelYStyle))
+			if (GUI.Button (new Rect(btnSelY_x, btnSelY_y, btnSelY_W, btnSelY_H), "", btnSelYStyle))
 				{
 				drawYMenu = true;
 				}
 		}
 
 		if (xVar != "" && yVar != ""){
-			if (GUI.Button (new Rect(btnGO_x, btnGO_y, btnGO_W, btnGO_H), "GO", btnGOStyle))
+			if (GUI.Button (new Rect(btnGO_x, btnGO_y, btnGO_W, btnGO_H), "", btnGOStyle))
 			{
 				loadMainLevel ();
 			}

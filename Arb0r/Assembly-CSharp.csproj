@@ -48,6 +48,7 @@
   <ItemGroup>
      <Compile Include="Assets\Branch.cs" />
      <Compile Include="Assets\CameraControl.cs" />
+     <Compile Include="Assets\CameraYMovement.cs" />
      <Compile Include="Assets\MainCameraToggle.cs" />
      <Compile Include="Assets\MiniCam.cs" />
      <Compile Include="Assets\Node.cs" />
@@ -57,6 +58,7 @@
      <Compile Include="Assets\Singleton.cs" />
      <Compile Include="Assets\TreeBuilder.cs" />
      <Compile Include="Assets\WindowDrag.cs" />
+     <None Include="Assets\Standard Assets\Skyboxes\_skybox info.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp-firstpass.csproj">
