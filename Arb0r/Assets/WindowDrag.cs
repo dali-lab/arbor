@@ -42,15 +42,15 @@ public class WindowDrag : MonoBehaviour {
 
 		drawMenu ();
 
-		if (displayYValues == true)
-			{
-			drawYVarMenu ();
-			}
-
-		if (displayXValues == true)
-		{
-			drawXVarMenu ();
-		}
+//		if (displayYValues == true)
+//			{
+//			drawYVarMenu ();
+//			}
+//
+//		if (displayXValues == true)
+//		{
+//			drawXVarMenu ();
+//		}
 	}
 
 	void drawMenu (){
@@ -59,22 +59,22 @@ public class WindowDrag : MonoBehaviour {
 		int y = bigBuff + smallBuff;
 
 		//draw the box to contain the menu
-		GUI.Box (new Rect(bigBuff, bigBuff, menuWidth, ((buttonHeight*5) + (smallBuff*6)) ), "");
+		GUI.Box (new Rect(bigBuff, bigBuff*3+smallBuff*2, menuWidth, ((buttonHeight*3) + (smallBuff*6)) ), "");
 
 
-		if (GUI.Button (new Rect(sideX, y, buttonWidth, buttonHeight), "<size=" + menuTextSize +">" + XbuttonText + "</size>"))
-		{
-			displayXValues = true;
-			XbuttonText = prettyArrows;
+//		if (GUI.Button (new Rect(sideX, y, buttonWidth, buttonHeight), "<size=" + menuTextSize +">" + XbuttonText + "</size>"))
+//		{
+//			displayXValues = true;
+//			XbuttonText = prettyArrows;
+//
+//
+//		}
 
-
-		}
-
-		if (GUI.Button (new Rect(sideX, (y+= (buttonHeight + smallBuff)), buttonWidth, buttonHeight), "<size=" + menuTextSize +">" + YbuttonText + "</size>"))
-		{
-			displayYValues = true;
-			YbuttonText = prettyArrows;
-		}
+//		if (GUI.Button (new Rect(sideX, (y+= (buttonHeight + smallBuff)), buttonWidth, buttonHeight), "<size=" + menuTextSize +">" + YbuttonText + "</size>"))
+//		{
+//			displayYValues = true;
+//			YbuttonText = prettyArrows;
+//		}
 
 
 		if (GUI.Button (new Rect(sideX, (y += (buttonHeight + smallBuff)), buttonWidth, buttonHeight), "<size=" + menuTextSize +">Reset</size>"))

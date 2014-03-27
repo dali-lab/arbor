@@ -12,7 +12,7 @@ public class MainCameraToggle : MonoBehaviour {
 	// Use this for initialization
 	
 	void OnGUI(){
-		GUI.Box(new Rect(xSide,Screen.height - 30, 120, 30 - xSide), label);
+		GUI.Box(new Rect(xSide,Screen.height - 30, 120, 50 - xSide), label);
 	}
 	
 	
