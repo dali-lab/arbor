@@ -129,11 +129,13 @@ public class OpenFile : MonoBehaviour {
 		if (GUI.Button(new Rect(btnLoad_x, btnLoad_y, btnLoad_W, btnLoad_H), "", btnLoadStyle))
 		{
 
+
 			path = EditorUtility.OpenFilePanel(
 				"Select txt file for parsing",
 				"",
 				"dta");
 			Debug.Log (path);
+			p.clearData ();
 			p.readFromFile (path);
 			dummyArray = p.getVariableNames();
 
