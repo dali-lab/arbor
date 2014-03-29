@@ -49,6 +49,12 @@
      <Compile Include="Assets\Branch.cs" />
      <Compile Include="Assets\CameraControl.cs" />
      <Compile Include="Assets\CameraYMovement.cs" />
+     <Compile Include="Assets\FileBrowser\FileBrowser.cs" />
+     <Compile Include="Assets\FileBrowser\TestScene\TestManager.cs" />
+     <Compile Include="Assets\FileBrowser\internals\GLUtils.cs" />
+     <Compile Include="Assets\FileBrowser\internals\GUILayoutx.cs" />
+     <Compile Include="Assets\FileBrowser\internals\SoundViewer.cs" />
+     <Compile Include="Assets\Instructions.cs" />
      <Compile Include="Assets\MainCameraToggle.cs" />
      <Compile Include="Assets\MiniCam.cs" />
      <Compile Include="Assets\Node.cs" />

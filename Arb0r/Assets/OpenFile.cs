@@ -49,7 +49,8 @@ public class OpenFile : MonoBehaviour {
 
 	string xVar;
 	string yVar;
-
+	
+	public FileBrowser myFileBrowser;
 
 
 
@@ -73,7 +74,8 @@ public class OpenFile : MonoBehaviour {
 		path = "";
 
 
-
+		//myFileBrowser = this.GetComponent<FileBrowser>();
+		myFileBrowser.fileMasks = "*.dta";
 	
 	}
 	
@@ -113,7 +115,7 @@ public class OpenFile : MonoBehaviour {
 
 	void OnGUI (){
 
-		GUI.Box(new Rect(0,0, Screen.width, Screen.height), "", bgMenu);
+		GUI.Box(new Rect(-15,0, Screen.width, Screen.height), "", bgMenu);
 
 		if (drawXMenu == true)
 		{
@@ -128,16 +130,17 @@ public class OpenFile : MonoBehaviour {
 
 		if (GUI.Button(new Rect(btnLoad_x, btnLoad_y, btnLoad_W, btnLoad_H), "", btnLoadStyle))
 		{
-
-
-			path = EditorUtility.OpenFilePanel(
-				"Select txt file for parsing",
-				"",
-				"dta");
-			Debug.Log (path);
-			p.clearData ();
-			p.readFromFile (path);
-			dummyArray = p.getVariableNames();
+//			Debug.Log(myFileBrowser.ShowBrowser("Choose a Data File",  callback));
+			myFileBrowser.ShowBrowser("Choose a Data File",  callback);
+			Debug.Log ("REACHED SHOWBROWSER");
+//		 	path = EditorUtility.OpenFilePanel(
+//				"Select txt file for parsing",
+//				"",
+//				"dta");
+//			Debug.Log (path);
+//			p.clearData ();
+//			p.readFromFile (path);
+//			dummyArray = p.getVariableNames();
 
 
 		}
@@ -161,6 +164,17 @@ public class OpenFile : MonoBehaviour {
 				loadMainLevel ();
 			}
 		}
+
+	}
+
+
+	void callback(string filename) {
+		Debug.Log ("REACHED CLLBACK");
+		path = filename;
+		Debug.Log (path);
+		p.clearData ();
+		p.readFromFile (path);
+		dummyArray = p.getVariableNames();
 
 	}
 
