@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEditor;
+//using UnityEditor;
 //parser stuff
 
 public class OpenFile : MonoBehaviour {
