@@ -111,23 +111,16 @@ public class TreeBuilder : MonoBehaviour {
 	}
 	
 	void makeNode(string str) {
-		GameObject loaded = (GameObject) Resources.Load (str);
-		GameObject shape;
-		if (loaded == null) {
-			shape = (GameObject)Instantiate(Resources.Load("sphere"));
-		}
-		else{
-	   		shape = (GameObject)Instantiate (loaded);
-		}
-		Node node = shape.gameObject.AddComponent<Node> ();
+		GameObject shape = (GameObject)Instantiate(Resources.Load(str));
+		Node node = shape.gameObject.AddComponent<Node>();
 		node.name = str;
-		Vector3 pos = (Vector3)nameXpos [str];
-		pos.Scale (posScale);
+		Vector3 pos = (Vector3)nameXpos[str];
+		pos.Scale(posScale);
 		node.location = pos;
 		shape.transform.position = node.location;
 		//shape.transform.localScale = new Vector3(20,20,20);
-		nameXGameObj [str] = shape;
-		shape.AddComponent<SphereCollider> ();
+		nameXGameObj[str] = shape;
+		shape.AddComponent<SphereCollider>();
 	
 	}
 
