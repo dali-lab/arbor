@@ -21,6 +21,10 @@ public class WindowDrag : MonoBehaviour {
 	string newXValue; // the variables that the program will read from to draw the tree
 	string newYValue;
 
+
+	Vector3 startPos;
+
+
 	string prettyArrows;
 
 	string[] dummyArray = new string[] {"weight", "height", "color", "temp", "geography", "LOL", "HAHAH", "Phineaus Gage", "Sinbad", "I'm a wizard"};
@@ -117,11 +121,12 @@ public class WindowDrag : MonoBehaviour {
 		selectedX = newXValue;
 		selectedY = newYValue;
 		
-		this.transform.localRotation = preOrthoTransform.localRotation;
-		this.transform.position = preOrthoTransform.position;
+
+		this.transform.position = startPos;
+		this.transform.LookAt (Vector3.zero);
 		this.camera.isOrthoGraphic = false;
 		inOrtho = false;
-
+		print ("NEW POS" + this.transform.position);
 		/* PUT CODE HERE
 		 * to reset the position of the camera at the base node
 		 * k cool.
@@ -211,7 +216,10 @@ public class WindowDrag : MonoBehaviour {
 	
 	// Use this for initialization
 	void Start () {
-		
+
+		startPos = this.transform.position;
+		print ("Start" + startPos);
+
 		p = (Parser) GameObject.FindObjectOfType(typeof(Parser)); // returns the first object of this type
 		if (p == null) {
 			p = gameObject.AddComponent<Parser>();

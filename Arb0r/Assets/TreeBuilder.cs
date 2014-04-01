@@ -14,7 +14,7 @@ public class TreeBuilder : MonoBehaviour {
 	private string string1;
 	private string string2;
 	private Vector3 posScale = new Vector3(4,2,4);
-
+	
 
 	// Use this for initialization
 
@@ -23,6 +23,7 @@ public class TreeBuilder : MonoBehaviour {
 	}
 	
 	void Start () {
+
 
 
 		//here's how to create a parser
@@ -93,7 +94,7 @@ public class TreeBuilder : MonoBehaviour {
 		co.transform.position = c.transform.position;
 		*/
 		
-		
+		 
 		/*
 		GameObject ps = (GameObject)Instantiate(Resources.Load("ps"));
 		ps.transform.rotation = c.transform.rotation;
@@ -111,16 +112,28 @@ public class TreeBuilder : MonoBehaviour {
 	}
 	
 	void makeNode(string str) {
-		GameObject shape = (GameObject)Instantiate(Resources.Load(str));
-		Node node = shape.gameObject.AddComponent<Node>();
-		node.name = str;
+		GameObject loaded = (GameObject) Resources.Load(str);
+		GameObject shape;
+		
 		Vector3 pos = (Vector3)nameXpos[str];
 		pos.Scale(posScale);
+		
+		if(loaded == null){
+			shape = (GameObject)Instantiate(Resources.Load("sphere"));
+		}
+		else{
+			shape = (GameObject)Instantiate(loaded);
+
+		}
+
+		Node node = shape.gameObject.AddComponent<Node>();
+		node.name = str;
 		node.location = pos;
-		shape.transform.position = node.location;
-		//shape.transform.localScale = new Vector3(20,20,20);
+		
+		shape.transform.position = pos;
 		nameXGameObj[str] = shape;
 		shape.AddComponent<SphereCollider>();
+
 	
 	}
 

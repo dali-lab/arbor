@@ -40,6 +40,14 @@ public class Parser : MonoBehaviour
 		DontDestroyOnLoad (this);	
 	}
 
+
+	public string getFilename (){
+
+		return fileName;
+
+	}
+
+
 	public void clearData (){
 
 		variableNames = new string [0];
