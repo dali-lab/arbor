@@ -18,11 +18,15 @@ public class OpenFile : MonoBehaviour {
 	bool drawXMenu = false;
 	bool drawYMenu = false;
 
+	bool isInstructions = false;
+
 	public GUIStyle btnLoadStyle = new GUIStyle();
 	public GUIStyle btnSelXStyle = new GUIStyle();
 	public GUIStyle btnSelYStyle = new GUIStyle();
 	public GUIStyle btnGOStyle = new GUIStyle();
 	public GUIStyle bgMenu = new GUIStyle();
+	public GUIStyle bgInst = new GUIStyle();
+	public Texture bgInstructions;
 
 	int WIDTH;
 	int HEIGHT;
@@ -115,7 +119,11 @@ public class OpenFile : MonoBehaviour {
 
 	void OnGUI (){
 
+
 		GUI.Box(new Rect(-15,0, Screen.width, Screen.height), "", bgMenu);
+
+
+
 
 		if (drawXMenu == true)
 		{
@@ -164,7 +172,7 @@ public class OpenFile : MonoBehaviour {
 				loadMainLevel ();
 			}
 		}
-
+		showInstructions ();
 	}
 
 
@@ -262,6 +270,25 @@ public class OpenFile : MonoBehaviour {
 	void loadMainLevel()
 	{
 		Application.LoadLevel("Tree"); //Just replace "mainLevel" with the name of the scene.
+	}
+
+	void showInstructions()
+	{
+		if(!isInstructions){
+			if (GUI.Button (new Rect (Screen.width - 150, 10, 100, 20), "Instructions")){
+				isInstructions = !isInstructions;
+			}
+		}
+		
+		
+		if(isInstructions){
+			GUI.Box (new Rect(0,0,Screen.width, Screen.height), "", bgInst);
+			//GUI.Label(new Rect(0,0,Screen.width, Screen.height), bgInstructions);
+			if(GUI.Button (new Rect (Screen.width - 150, 10 , 100, 20), "Close")){
+				isInstructions = !isInstructions;
+			}
+		}
+
 	}
 
 
