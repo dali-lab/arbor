@@ -1,0 +1,302 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1265
+{\fonttbl\f0\fswiss\fcharset0 ArialMT;\f1\fmodern\fcharset0 Courier;\f2\fmodern\fcharset0 CourierNewPSMT;
+}
+{\colortbl;\red255\green255\blue255;\red0\green77\blue187;\red0\green0\blue128;}
+\vieww33400\viewh19600\viewkind0
+\deftab720
+\pard\pardeftab720\qc
+
+\f0\b\fs38 \cf0 Unity File Brower & Save/Load UI
+\b0 \
+Copyright \'a9 2012 Pigasus Games\
+Version 1.1.1.9\
+petrucio@pigasusgames.com\
+\pard\pardeftab720
+\cf0 \
+\
+Thank you for buying the File Browser and Save/Load UI!\
+\
+The File Browser provides an User Interface to browse for files in the user's filesystem, using the standard Unity GUI system, so it doesn't use any dll (and can run in both Pro or Free versions of Unity), doesn't require any external UI library, and can be styled to have the same Look & Feel as your game.\
+\
+It shows large previews for image files (jpeg and png), as well as smaller previews in the entry for the files themselves (the height of the file entries can be configured to fine-tune the previews).\
+\
+It also provides Save and Load mode UIs, including taking and saving screenshots to use as Save Previews.\
+\
+As of version 1.1, it also previews sound files, with channel previews and FTTWindow visualization.\
+\
+Notes on supported platforms:\
+- Does not work on webplayers, as these do not have access to the filesystem.\
+- Mobile support is planned for Version 1.2 (no time estimate on that)\
+\
+\
+\pard\pardeftab720
+
+\b\fs36 \cf0 Getting started - if you are in a real hurry:
+\b0\fs38 \
+\
+To create a File Browser:\
+1. Simply drag the FileBrowser.cs script into a GameObject\
+2. Implement a function with this signature:\
+\pard\pardeftab720
+
+\f1 \cf0         
+\f2\fs36 \cf2 void YourCallback (string filename)
+\f0\fs38 \cf0 \
+\pard\pardeftab720
+
+\fs36 \cf0 3. Call 
+\f2 \cf2 ShowBrowser("A Title", YourCallback);
+\f0\fs38 \cf0 \
+	(Or ShowSaveBrowser / ShowLoadBrowser)\
+\
+\
+\pard\pardeftab720
+
+\b\fs36 \cf0 Getting properly started
+\b0\fs38 \
+\
+To setup a File Browser, drag the script FileBroser.cs into a GameObject. You can do this in two ways:\
+\pard\pardeftab720
+
+\fs36 \cf0 - You can drag in over the existing GameObject that has the code that will handle the file returned by the browser, and access it by calling 
+\f2 \cf2 GetComponent<FileBrowser>()
+\f0\fs38 \cf0 \
+- You can drag it into an empty GameObject to keep things clear and organized, and access it by exposing a public FileBrowser variable in one of your scripts and assigning it via the inspector\
+\
+To receive results from the FileBrowser when the user clicks Ok or Cancel, implement a callback function receiving a string:\
+\pard\pardeftab720
+
+\f2\fs34 \cf2 void FileBrowserCallback(string filename) \{
+\f0\fs38 \cf0 \
+
+\f2\fs34 \cf2 	print(filename);		// Do something interesting with the file
+\f0\fs38 \cf0 \
+
+\f2\fs34 \cf2 \}
+\f0\fs38 \cf0 \
+\pard\pardeftab720
+
+\fs36 \cf0 filename will be 
+\f1 \cf2 null 
+\f0\fs38 \cf0 if the user clicks Cancel instead of Ok.\
+\
+To show the FileBrowser, call one of these functions:\
+\pard\pardeftab720
+
+\f2\fs34 \cf2 void ShowBrowser    (string title, FinishedCallback callback)
+\f0\fs38 \cf0 \
+
+\f2\fs34 \cf2 void ShowBrowser    (string title, FinishedCallback callback, string startingDir, Rect screenRect, string okString)
+\f0\fs38 \cf0 \
+
+\f2\fs34 \cf2 void ShowSaveBrowser(string title, FinishedCallback callback)
+\f0\fs38 \cf0 \
+
+\f2\fs34 \cf2 void ShowSaveBrowser(string title, FinishedCallback callback, string saveBaseDir, string saveDataDir, Rect screenRect, Texture2D screenshot)
+\f0\fs38 \cf0 \
+
+\f2\fs34 \cf2 void ShowLoadBrowser(string title, FinishedCallback callback)
+\f0\fs38 \cf0 \
+
+\f2\fs34 \cf2 void ShowLoadBrowser(string title, FinishedCallback callback, string saveBaseDir, string saveDataDir, Rect screenRect)
+\f0\fs38 \cf0 \
+\
+\pard\pardeftab720
+\cf0 \ul \ulc0 Save / Load Browsers:\ulnone \
+\
+Save / Load Browsers work by taking screenshots and saving them in one directory (the one which the user will browse), and saving the data files in another directory.\
+The Save Browser can automatically take the screenshot, or a Texture2D can be provided for this purpose. It will save it as a .png file into the directory being browsed, and call the callback with a file named with the same name, without extension, into the data dir.\
+\
+\ul \ulc0 Save example:\ulnone \
+If you make this call:\
+\pard\pardeftab720
+
+\f2\fs34 \cf2 ShowSaveBrowser("title", Callback, "savesDir", "savesDir/data", FileBrowser.GetDefaultRect(), null)
+\f0\fs38 \cf0 \
+and the user chooses a name Foo Bar for his save, the callback will get called with the string:\
+
+\f2\fs36 \cf2 "savesDir/data/Foo Bar"
+\f0\fs38 \cf0 \
+and a .png preview file (at half screen resolutions) will be automatically created at:\
+savesDir/Foo Bar.png\
+\
+Note: The File Browser doesn't do any actual saving inside the file "savesDir/data/Foo Bar" - that's your responsibility\
+\
+Parameter descriptions:\
+\pard\pardeftab720
+
+\b\fs36 \cf0 title 
+\b0\fs38 - The string at the File Browser's window title bar (Duuh)\
+
+\b\fs36 callback 
+\b0\fs38 - Function to call when the File Browser is done\
+
+\b\fs36 startingDir 
+\b0\fs38 - Initial directory the File Browser will start in. Defaults to the current working directory.\
+
+\b\fs36 screenRect 
+\b0\fs38 - Rectangle defining the File Browser's boundaries. Dimensions should not be less than (780x460). Defaults to a centered window occupying 2/3 of the Screen width and height (or more for lower resolutions). Call FileBrowser.GetDefaultRect() to get this default rect.\
+
+\b\fs36 okString 
+\b0\fs38 - the string displayed on the 'Ok' button. Defaults to "Select".\
+
+\b\fs36 saveBaseDir 
+\b0\fs38 - For Save and Load browsers, specifies the directory where the previews will stay. Defaults to "saves".\
+
+\b\fs36 saveDataDir 
+\b0\fs38 - For Save and Load browsers, specifies the directory where the data files will stay. Defaults to "saves/data".\
+
+\b\fs36 screenshot 
+\b0\fs38 - For Save Browsers, specifies a texture to use as the save slot preview screenshot. Defaults to a standard screenshot at half screen resolution to reduce disk space and load times. Pass null to generate this default.\
+\
+\
+
+\b\fs36 File Browser public options
+\b0\fs38 \
+\
+
+\b\fs36 Show Places:
+\b0\fs38  Show the leftmost column with the list of drives and special folders (My Pictures, etc). This is needed to enable logical drive changes under Windows.\
+
+\b\fs36 Dir Explorer:
+\b0\fs38  Allow the user to change directory. When false, hides the top navigation buttons, the places list, and the left directory list.\
+
+\b\fs36 Accepts Directories:
+\b0\fs38  If true, enables the 'Ok' button even if no file is selected / typed. (Default = false)\
+
+\b\fs36 Enable File Delete:
+\b0\fs38  If true, the user will be able to delete files from inside the File Browser by pressing the Delete key and then confirming.\
+
+\b\fs36 Hide Extensions:
+\b0\fs38  Hide or show file extensions\
+
+\b\fs36 Show Text Input:
+\b0\fs38  If true, shows a text field for the user to type a file name. Always true for Save Browsers. (default = false for others)\
+
+\b\fs36 Input Must Exist:
+\b0\fs38  Do not enable the 'Ok' button if there's no valid file selection. Always true for Load Browsers.\
+
+\b\fs36 Overwrite Warn:
+\b0\fs38  If the file selected already exists, pops a confirmation dialog before calling back.\
+
+\b\fs36 File Masks:
+\b0\fs38  comma or semicolon-separated list of accepted file masks. Files not matching any pattern will not be shown.\
+
+\b\fs36 Default Dir:
+\b0\fs38  Default starting dir for this browser, when using one of the simpler show functions.\
+
+\b\fs36 Remember Last Dir:
+\b0\fs38  If true, restarts at the same directory as when the user last clicked Ok.\
+\
+\pard\pardeftab720
+\cf0 \ul \ulc0 Look and Feel customization options:\ulnone \
+\
+\pard\pardeftab720
+
+\b\fs36 \cf0 Skin:
+\b0\fs38  The skin to use for the browser. Default to the currently set GUI.skin. An optional custom style "List Item", if provided, will be used to style the browsers items (if not, the Label style will be used)\
+
+\b\fs36 Item Hover Image:
+\b0\fs38  An image to use on top of hovered items. Will get stretched indefinetely on it's width.\
+
+\b\fs36 Item Hover Text Color:
+\b0\fs38  Color to use for hovered items. Leave at (255,0,255) to use the Label style hover color.\
+
+\b\fs36 Item Selected Image / Text Color:
+\b0\fs38  Same as above, but for the selected item\
+
+\b\fs36 Dir Image:
+\b0\fs38  Image to use for directory icons\
+
+\b\fs36 File Icon:
+\b0\fs38  Image to use for non-jpeg or png file icons\
+
+\b\fs36 Dirs Height:
+\b0\fs38  Height for each directory entry\
+
+\b\fs36 Files Height:
+\b0\fs38  Height for each file entry\
+
+\b\fs36 Places HD Icon:
+\b0\fs38  Icon to use for the 'Drives' button\
+
+\b\fs36 Places Desktop Icon:
+\b0\fs38  Icon to use for the 'Desktop' special directory button\
+
+\b\fs36 Places My Docs Icon:
+\b0\fs38  Icon to use for the 'My Documents' special directory button\
+
+\b\fs36 Places My Pics Icon:
+\b0\fs38  Icon to use for the 'My Pictures' special directory button\
+\
+\pard\pardeftab720
+\cf0 \ul \ulc0 Sound Preview customization options:\ulnone \
+\
+\pard\pardeftab720
+
+\b\fs36 \cf0 ASource:
+\b0\fs38  AudioSource to use for previewing (if not set, tries to find an AudioSource in: a. itself, b. it's childen, or c. the scene)\
+
+\b\fs36 Fall Speed:
+\b0\fs38  Speed in which the spectrum visualization vertices fall (in window-heights per second)\
+
+\b\fs36 Samples Size:
+\b0\fs38  spectrum visualization vertice count (power of 2, >= 64)\
+
+\b\fs36 Bg Color:
+\b0\fs38  Sound preview rectangles background\
+
+\b\fs36 Border Color:
+\b0\fs38  Sound preview rectangles border\
+
+\b\fs36 Samples Color:
+\b0\fs38  Color used to draw the audio clip's samples and spectrum\
+
+\b\fs36 Markers Color:
+\b0\fs38  Color used to draw the Play Bar and the spectrum visualization vertices\
+
+\b\fs36 Sound Preview Vert Offset:
+\b0\fs38  Vertical offset, starting from the top of the File Browser window, to draw the sound previews. May need to be changed depending on the skin being used.\
+\
+\
+
+\b\fs36 Support and Feedback
+\b0\fs38 \
+\
+If you have any questions, suggestions, comments or feature requests:\
+- email petrucio@pigasusgames.com\
+- post on the official thread: {\field{\*\fldinst{HYPERLINK "http://forum.unity3d.com/threads/154049-File-Browser-amp-Save-Load-UI"}}{\fldrslt \cf3 \ul \ulc0 http://forum.unity3d.com/threads/154049-File-Browser-amp-Save-Load-UI}}\
+- or PM 'Petrucio' on the Unity forums\
+\pard\pardeftab720
+\cf0 \
+\
+\pard\pardeftab720
+
+\b\fs36 \cf0 Change Log:
+\b0\fs38 \
+\
+1.1.1.10, Feb-19-2014:\
+\pard\pardeftab720
+
+\fs36 \cf0 - Added: Tweak styles on the fly with 
+\f2 REFRESH_STYLES_EVERY_FRAME = true
+\f0\fs38 \
+- Minor fixes and improvements\
+\
+1.1.0.9, Apr-17-2013:\uc0\u8232 - Performance: Added thumbnail caching\u8232 - Other minor fixes and improvements\
+\uc0\u8232 1.1.0.7, Jan-08-2013:\
+- Added: Sound files Previewer (major)\
+- Added: Remember Last Dir option\
+- Fixed: MacOS / Linux path separator issues\
+- Several other minor fixes and improvements\
+\
+1.0.0.6, Oct-08-2012:\
+- Initial Release\
+\
+\
+\uc0\u8232 \
+\
+\
+\
+\
+}
