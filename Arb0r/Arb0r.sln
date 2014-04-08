@@ -7,6 +7,8 @@ Project("{7A0308DF-4700-2E2E-2EDC-834FA00075A5}") = "Arb0r", "Assembly-CSharp.cs
 EndProject
 Project("{7A0308DF-4700-2E2E-2EDC-834FA00075A5}") = "Arb0r", "Assembly-UnityScript-firstpass.unityproj", "{904D3CDE-4649-7721-F14E-4182DAB56173}"
 EndProject
+Project("{7A0308DF-4700-2E2E-2EDC-834FA00075A5}") = "Arb0r", "Assembly-UnityScript.unityproj", "{8957385E-10A8-F949-2E11-42ACFE449294}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,11 +27,15 @@ Global
 		{904D3CDE-4649-7721-F14E-4182DAB56173}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{904D3CDE-4649-7721-F14E-4182DAB56173}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{904D3CDE-4649-7721-F14E-4182DAB56173}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8957385E-10A8-F949-2E11-42ACFE449294}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8957385E-10A8-F949-2E11-42ACFE449294}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8957385E-10A8-F949-2E11-42ACFE449294}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8957385E-10A8-F949-2E11-42ACFE449294}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-																																																																											GlobalSection(MonoDevelopProperties) = preSolution
+																																																																															GlobalSection(MonoDevelopProperties) = preSolution
 =======
 					GlobalSection(MonoDevelopProperties) = preSolution
 >>>>>>> 3451836336ad0f97c0364bf53ea66bde0352ce65

@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: f5b05eecb485447a587dcd902171bd2b
+labels:
+- ObjReader
+- obj
+- import
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
