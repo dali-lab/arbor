@@ -1,5 +1,5 @@
 ## Arbor ##
-by Caleb An, Talia Weiss and Josh Thomas
+by Caleb An, Talia Weiss, Josh Thomas, and Nook Harquail
 
 ### About ###
 Arbor is a Unity plugin that renders creature models and phylogeny trees for feature comparison and analysis. Researchers are able to view 3d models of organism features online in the context of species' evolutionary position and other metrics. 
